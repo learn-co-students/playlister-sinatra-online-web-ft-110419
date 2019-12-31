@@ -1,0 +1,6 @@
+<%= @artist.name %>
+<% @artist.songs.each do |song| %>
+    <%= song.name %> 
+    <%= song.genres %>
+<% end %>
+<p>Return to <a href="/artists/#{@artist.slug}>Artist Page</a></p>

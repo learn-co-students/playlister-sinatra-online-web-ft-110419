@@ -1,4 +1,4 @@
 <% @artists.each.with_index(1) do |artist, i| %>
-    <%= i %>. <a href="/artists/#{@artist.slug}><%= artist.name %></a><br>
+    <%= i %>. <a href="/artists/<%= artist.slug %>"><%= artist.name %></a><br>
     <br>
     <% end %>

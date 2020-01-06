@@ -4,7 +4,7 @@
 <input type="text" name="artist" id="Artist Name" value="<%=@song.artist%>">
 
 <% @song.genres.each do |genre| %>
-    <input type="checkbox" name="genre_ids" id="<%= genre.name %>" value="<%= genre.name %>">
+    <input type="checkbox" name="genre_ids" id="<%= genre.name %>" value="<%= genre.id %>">
   <% end %>
 
 <input type="submit" value="Save">

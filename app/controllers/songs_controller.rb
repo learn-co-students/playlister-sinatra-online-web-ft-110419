@@ -10,20 +10,33 @@ class SongsController < ApplicationController
         erb :'/songs/new'
     end
 
-
-    # working on this method - spec 5
     post '/songs' do
-        binding.pry
-        artist = Artist.create(:name => params[:artist])
+        artist = Artist.find_or_create_by(:name => params[:artist])
         song = Song.new(:name => params[:name]) 
         song.artist = artist
-        # song.genres = params[:genre_ids].to_i
+        song.genres = params[:genre_ids].to_i
         song.save
-        erb :'songs/#{song.slug}'
+        # need to fix redirect link - not passing test
+        redirect "/songs/#{song.slug}"
     end
 
     get '/songs/:slug' do
         @song = Song.find_by_slug(params[:slug])
         erb :'/songs/show'
     end
+
+    get '/songs/:slug/edit' do
+        @song = Song.find_by_slug(params[:slug])
+        erb :'/songs/edit'
+    end
+
+    patch '/songs/:slug' do
+        @song = Song.find_by_slug(params[:slug])
+        @song.name = params[:name]
+        @song.artist = params[:artist]
+        @song.genres = params[:genre_ids].to_i
+        @song.save
+        redirect "/songs/#{song.slug}"
+    end
+
 end

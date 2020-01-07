@@ -11,13 +11,11 @@ class SongsController < ApplicationController
     end
 
     post '/songs' do
-        artist = Artist.find_or_create_by(:name => params[:artist])
-        song = Song.new(:name => params[:name]) 
-        song.artist = artist
-        song.genres = params[:genre_ids].to_i
+        song = Song.new(:name => params[:song][:name])
+        song.artist = Artist.find_or_create_by(:name => params[:song][:artist][:name])
+        song.genres << Genre.find_or_create_by(params[:song][:genres])
         song.save
-        # need to fix redirect link - not passing test
-        redirect "/songs/#{song.slug}"
+        redirect to "/songs/#{song.slug}"
     end
 
     get '/songs/:slug' do
@@ -31,12 +29,12 @@ class SongsController < ApplicationController
     end
 
     patch '/songs/:slug' do
-        @song = Song.find_by_slug(params[:slug])
-        @song.name = params[:name]
-        @song.artist = params[:artist]
-        @song.genres = params[:genre_ids].to_i
-        @song.save
-        redirect "/songs/#{song.slug}"
+        song = Song.find_by_slug(params[:slug])
+        song.name = params[:song][:name]
+        song.artist = params[:song][:artist]
+        # song.genres = params[:song][:genres]
+        song.save
+        redirect to "/songs/#{song.slug}"
     end
 
 end

@@ -1,0 +1,12 @@
+<h1>Your Genres:</h1>
+<ol>
+<% @genres.each do |g| %>
+	<li><a href="/genres/<%= g.slug %>"><%= g.name %></a></li>
+	<p></p>
+	<form method=POST action="/genres/<%= g.slug %>/delete">
+		<input type= "hidden" id = "hidden" name="_method" value = "DELETE">
+		<input type="submit" value="Delete Genre">
+	</form>
+	<p></p>
+<% end %>
+</ol>

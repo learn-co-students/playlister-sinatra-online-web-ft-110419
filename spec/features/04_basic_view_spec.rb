@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "Playlister Basics" do
-  let(:artist_name) { "Person with a Face" }
+  let(:artist_name) { "Person With A Face" }
   let(:genre_name) { "New Age Garbage" }
   let(:song_name) { "That One with the Guitar" }
 

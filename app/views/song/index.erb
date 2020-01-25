@@ -1,0 +1,23 @@
+<html>
+	<body>
+		<h1>Here Are All Your Songs:</h1>
+		<% @songs.each do |song| %>
+			<p><%= song.name %></p>
+			<% if song.artist %>
+				<p>By <%= song.artist.name %></p>
+			<% end %>
+			<a href = "/songs/<%= song.slug %>">More About This Song</a>
+			<br>
+			<br>
+			<a href = "/songs/<%= song.slug %>/edit">Edit This Song</a>
+			<br>
+			<br>
+			<form method = "POST" action = "songs/<%= song.slug %>/delete">
+			<input type = "hidden" id = "hidden" name = "_method" value = "DELETE">
+			<input type = "submit" value = "Delete Song">
+			<br>
+			<br>
+		<% end %>
+		</form>
+	</body>
+</html>
